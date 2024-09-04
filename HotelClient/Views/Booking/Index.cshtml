@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HotelClient.Models.BookingViewModel>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h2>Bookings</h2>
+
+<p>
+    <a class="btn btn-success" asp-controller="Customer" asp-action="Create">Create New Booking</a>
+</p>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+                <th>@Html.DisplayNameFor(model => model.HotelBranch)</th>
+                <th>@Html.DisplayNameFor(model => model.CheckIn)</th>
+                <th>@Html.DisplayNameFor(model => model.CheckOut)</th>
+                <th>@Html.DisplayNameFor(model => model.TotalPrice)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => booking.CustomerName)</td>
+                    <td>@Html.DisplayFor(model => booking.HotelBranch)</td>
+                    <td>@Html.DisplayFor(model => booking.CheckIn)</td>
+                    <td>@Html.DisplayFor(model => booking.CheckOut)</td>
+                    <td>@Html.DisplayFor(model => booking.TotalPrice)</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@booking.Id" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No bookings available.
+    </div>
+}
